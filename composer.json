@@ -1,0 +1,32 @@
+{
+    "name": "michalkvasnicak/oauth2-server",
+    "description": "OAuth 2.0 server implementation for PHP",
+    "homepage": "http://github.com/michalkvasnicak/oauth2-server",
+    "type": "library",
+    "keywords": ["oauth", "php", "security", "authorization", "authentication"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michal Kvasnicak",
+            "email": "michal.kvasnicak@mink.sk",
+            "homepage": "http://www.kvasnicak.info",
+            "role": "developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0",
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "OAuth2\\": "src/OAuth2",
+            "tests\\": "tests/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}

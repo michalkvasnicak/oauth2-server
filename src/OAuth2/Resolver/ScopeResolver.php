@@ -114,15 +114,19 @@ class ScopeResolver implements IScopeResolver
      */
     protected function parseScopeArray(array $scopes)
     {
+        $parsedScopes = [];
+
         foreach ($scopes as $scope) {
             if (is_string($scope) && $scope != '') {
-                yield $scope;
+                $parsedScopes[] = $scope;
             } else if ($scope instanceof IScope) {
-                yield $scope->getId();
+                $parsedScopes[] =  $scope->getId();
             } else {
                 throw new \InvalidArgumentException('Scopes has to be array of strings or OAuth2\Storage\IScope instances.');
             }
         }
+
+        return $parsedScopes;
     }
 
 }

@@ -64,6 +64,7 @@ class ClientCredentials implements IGrantType
      *
      * @throws \OAuth2\Exception\InvalidClientException
      * @throws \OAuth2\Exception\InvalidScopeException
+     * @throws \OAuth2\Exception\UnauthorizedClientException
      * @return IAccessToken
      */
     public function grant(IRequest $request)
@@ -74,7 +75,7 @@ class ClientCredentials implements IGrantType
             throw new UnauthorizedClientException('Client can not use this grant type.');
         }
 
-        if (empty($client->getSecret())) {
+        if (!$client->getSecret()) {
             throw new InvalidClientException('Only confidential clients can use this method.');
         }
 

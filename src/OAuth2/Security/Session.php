@@ -30,7 +30,7 @@ class Session
 
 
     /**
-     * Gets users accociated with current  access token (current authenticated user)
+     * Gets users associated with current  access token (current authenticated user)
      *
      * @return \OAuth2\Storage\IUser
      */

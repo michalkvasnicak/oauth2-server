@@ -1,4 +1,4 @@
-# OAuth 2.0 server for PHP
+# OAuth 2.0 server for PHP and HHVM
 ---
 
 OAuth 2.0 server implementation of final draft [http://tools.ietf.org/html/rfc6749](http://tools.ietf.org/html/rfc6749)
@@ -12,6 +12,7 @@ This library is not tested in production.
 ---
 
 PHP >= 5.4.0
+HHVM
 
 ## Installation
 
@@ -20,7 +21,7 @@ Using composer:
 ```json
 {
     "require": {
-        "michalkvasnicak/oauth2-server": "dev-master"
+        "michalkvasnicak/oauth2-server": "dev-develop"
     }
 }
 ```

@@ -5,7 +5,7 @@ namespace OAuth2\Storage;
 /**
  * @author Michal Kvasničák <michal.kvasnicak@mink.sk>
  */
-interface ITokenGenerator 
+interface ITokenGenerator extends ITemporaryGenerator
 {
 
     /**

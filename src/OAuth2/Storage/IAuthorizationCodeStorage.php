@@ -5,7 +5,7 @@ namespace OAuth2\Storage;
 /**
  * @author Michal Kvasničák <michal.kvasnicak@mink.sk>
  */
-interface IAuthorizationCodeStorage 
+interface IAuthorizationCodeStorage extends ITemporaryGenerator
 {
 
 

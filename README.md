@@ -13,8 +13,8 @@ This library is not tested in production.
 ## Requirements
 ---
 
-PHP >= 5.4.0
-HHVM
+* PHP >= 5.4.0
+* HHVM
 
 ## Installation
 
@@ -73,10 +73,13 @@ $grantTypeResolver->accept($grantType); // register OAuth2\GrantType\IGrantType
 
 $accessTokenIssuer = new AccessTokenIssuer($grantTypeResolver);
 
+// access token lifetime is handled by access token storage
 $accessToken = $accessTokenIssuer->issueToken($request); // returns OAuth2\Storage\IAccessToken
 
 // refresh token has to be issued manually
-$refreshTokenIssuer = new RefreshTokenIssuer($refreshTokenStorage, $lifetime);
+$refreshTokenIssuer = new RefreshTokenIssuer($refreshTokenStorage);
+
+// refresh token lifetime is handled by refresh token storage
 
 $refreshTokenIssuer->issueToken($accessToken); // returns OAuth2\Storage\IRefreshToken
 ```

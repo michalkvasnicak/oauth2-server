@@ -16,7 +16,7 @@ class RefreshTokenIssuerSpec extends ObjectBehavior
 
     function let(IRefreshTokenStorage $refreshTokenStorage)
     {
-        $this->beConstructedWith($refreshTokenStorage, 15000);
+        $this->beConstructedWith($refreshTokenStorage);
     }
 
 
@@ -36,7 +36,7 @@ class RefreshTokenIssuerSpec extends ObjectBehavior
         $accessToken->getUser()->willReturn($user)->shouldBeCalled();
         $accessToken->getClient()->willReturn($client)->shouldBeCalled();
         $accessToken->getScopes()->willReturn([$scope])->shouldBeCalled();
-        $refreshTokenStorage->generate($user, $client, [$scope], 15000)->willReturn($refreshToken)->shouldBeCalled();
+        $refreshTokenStorage->generate($user, $client, [$scope])->willReturn($refreshToken)->shouldBeCalled();
         $this->issueToken($accessToken)->shouldReturnAnInstanceOf('OAuth2\Storage\IRefreshToken');
     }
 

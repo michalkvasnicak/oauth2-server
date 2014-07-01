@@ -11,16 +11,12 @@ use OAuth2\Storage\IRefreshTokenStorage;
 class RefreshTokenIssuer 
 {
 
-    /** @var int  */
-    protected $lifetime;
-
     /** @var \OAuth2\Storage\IRefreshTokenStorage  */
     protected $refreshTokenStorage;
 
 
-    public function __construct(IRefreshTokenStorage $refreshTokenStorage, $lifetime = 1209600)
+    public function __construct(IRefreshTokenStorage $refreshTokenStorage)
     {
-        $this->lifetime = (int) $lifetime;
         $this->refreshTokenStorage = $refreshTokenStorage;
     }
 
@@ -37,8 +33,7 @@ class RefreshTokenIssuer
         return $this->refreshTokenStorage->generate(
             $accessToken->getUser(),
             $accessToken->getClient(),
-            $accessToken->getScopes(),
-            $this->lifetime
+            $accessToken->getScopes()
         );
     }
 

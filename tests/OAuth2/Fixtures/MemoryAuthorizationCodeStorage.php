@@ -29,6 +29,17 @@ class MemoryAuthorizationCodeStorage implements IAuthorizationCodeStorage
     }
 
     /**
+     * Sets lifetime for generator
+     *
+     * @param int $lifetime
+     */
+    public function setLifetime($lifetime)
+    {
+        // TODO: Implement setLifetime() method.
+    }
+
+
+    /**
      * @param IUser $user
      * @param IClient $client
      * @param array $scopes

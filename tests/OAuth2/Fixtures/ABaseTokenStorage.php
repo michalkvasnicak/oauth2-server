@@ -24,5 +24,11 @@ abstract class ABaseTokenStorage
         return isset($this->tokens[$id]) ?  $this->tokens[$id] : null;
     }
 
+
+    public function setLifetime($lifetime)
+    {
+
+    }
+
 }
  

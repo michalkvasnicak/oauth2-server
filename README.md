@@ -1,6 +1,8 @@
 # OAuth 2.0 server for PHP and HHVM
 ---
 
+[![Build Status](https://travis-ci.org/michalkvasnicak/oauth2-server.svg?branch=develop)](https://travis-ci.org/michalkvasnicak/oauth2-server)
+
 OAuth 2.0 server implementation of final draft [http://tools.ietf.org/html/rfc6749](http://tools.ietf.org/html/rfc6749)
 
 Examples of using different grant types are in tests directory.

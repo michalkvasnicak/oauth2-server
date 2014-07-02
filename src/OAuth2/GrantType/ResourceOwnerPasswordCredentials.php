@@ -82,7 +82,7 @@ class ResourceOwnerPasswordCredentials implements IGrantType
         $username = $request->request('username');
         $password = $request->request('password');
 
-        if (empty($username) && empty($password)) {
+        if (empty($username) || empty($password)) {
             throw new InvalidRequestException('Username and password are required.');
         }
 

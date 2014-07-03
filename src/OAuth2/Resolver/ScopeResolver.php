@@ -57,13 +57,21 @@ class ScopeResolver implements IScopeResolver
      * If requested scopes are empty, returns available scopes
      *
      * @param array|string|null $requestedScopes
-     * @param IScope[] $availableScopes
+     * @param array|\Traversable|IScope[] $availableScopes
      *
      * @return IScope[]
      * @throws InvalidScopeException
      */
-    public function intersect($requestedScopes, array $availableScopes = [])
+    public function intersect($requestedScopes, $availableScopes = [])
     {
+        if ($availableScopes instanceof \Traversable) {
+            $availableScopes = iterator_to_array($availableScopes);
+        } else if (!is_array($availableScopes)) {
+            throw new \InvalidArgumentException(
+                'Available scopes has to be array or traversable. But ' . gettype($availableScopes) . ' was given.'
+            );
+        }
+
         $intersection = [];
 
         if (empty($availableScopes)) {
@@ -83,6 +91,8 @@ class ScopeResolver implements IScopeResolver
             $requestedScopes = explode(' ', $requestedScopes);
         } else if ($requestedScopes instanceof IScope) {
             $requestedScopes = [$requestedScopes->getId()];
+        } else if ($requestedScopes instanceof \Traversable) {
+            $requestedScopes = $this->parseScopeArray(iterator_to_array($requestedScopes));
         } else if (is_array($requestedScopes)) {
             $requestedScopes = $this->parseScopeArray($requestedScopes);
         }

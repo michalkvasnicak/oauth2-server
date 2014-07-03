@@ -28,11 +28,11 @@ interface IScopeResolver
      * If requested scopes are empty, returns available scopes
      *
      * @param array|string|null $requestedScopes
-     * @param IScope[] $availableScopes
+     * @param array|\Traversable|IScope[] $availableScopes
      *
      * @return IScope[]
      * @throws InvalidScopeException
      */
-    public function intersect($requestedScopes, array $availableScopes = []);
+    public function intersect($requestedScopes, $availableScopes = []);
 
 }

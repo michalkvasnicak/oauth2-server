@@ -3,6 +3,8 @@
 
 * Develop: [![Build Status](https://travis-ci.org/michalkvasnicak/oauth2-server.svg?branch=develop)](https://travis-ci.org/michalkvasnicak/oauth2-server)
 * Master: [![Build Status](https://travis-ci.org/michalkvasnicak/oauth2-server.svg?branch=master)](https://travis-ci.org/michalkvasnicak/oauth2-server)
+* [![Gittip](http://img.shields.io/gittip/michalkvasnicak.svg)](https://www.gittip.com/michalkvasnicak)
+* [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=kvasnicak.michal&url=https://github.com/michalkvasnicak/oauth2-server&title=michalkvasnicak/oauth2-server&language=php&tags=github&category=software)
 
 OAuth 2.0 server implementation of final draft [http://tools.ietf.org/html/rfc6749](http://tools.ietf.org/html/rfc6749)
 

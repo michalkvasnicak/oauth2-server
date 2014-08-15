@@ -8,12 +8,12 @@ use tests\OAuth2\Fixtures\Client;
 use tests\OAuth2\Fixtures\Request;
 use tests\OAuth2\Fixtures\Scope;
 use tests\OAuth2\Fixtures\User;
-use tests\OAuth2GrantTypeTest;
+use tests\OAuth2GrantTypeTestCase;
 
 /**
  * @author Michal Kvasničák <michal.kvasnicak@mink.sk>
  */
-class ImplicitGrantTypeTest extends OAuth2GrantTypeTest
+class ImplicitGrantTypeTest extends OAuth2GrantTypeTestCase
 {
 
 

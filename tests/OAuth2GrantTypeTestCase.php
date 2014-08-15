@@ -18,7 +18,7 @@ use tests\OAuth2\Fixtures\MemoryUserAuthenticator;
 /**
  * @author Michal Kvasničák <michal.kvasnicak@mink.sk>
  */
-class OAuth2GrantTypeTest extends \PHPUnit_Framework_TestCase
+class OAuth2GrantTypeTestCase extends \PHPUnit_Framework_TestCase
 {
 
     /** @var ScopeResolver  */

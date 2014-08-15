@@ -7,12 +7,12 @@ use tests\OAuth2\Fixtures\Client;
 use tests\OAuth2\Fixtures\Request;
 use tests\OAuth2\Fixtures\Scope;
 use tests\OAuth2\Fixtures\User;
-use tests\OAuth2GrantTypeTest;
+use tests\OAuth2GrantTypeTestCase;
 
 /**
  * @author Michal Kvasničák <michal.kvasnicak@mink.sk>
  */
-class AuthorizationCodeGrantTypeTest extends OAuth2GrantTypeTest
+class AuthorizationCodeGrantTypeTest extends OAuth2GrantTypeTestCase
 {
 
     protected function setUp()

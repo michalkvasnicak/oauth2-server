@@ -13,7 +13,7 @@
         >
     <testsuites>
         <testsuite name="michalkvasnicak/oauth2-server">
-            <directory>./tests/</directory>
+            <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

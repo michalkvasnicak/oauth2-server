@@ -7,12 +7,12 @@ use OAuth2\TokenIssuer\AccessTokenIssuer;
 use tests\OAuth2\Fixtures\Client;
 use tests\OAuth2\Fixtures\Request;
 use tests\OAuth2\Fixtures\Scope;
-use tests\OAuth2GrantTypeTest;
+use tests\OAuth2GrantTypeTestCase;
 
 /**
  * @author Michal Kvasničák <michal.kvasnicak@mink.sk>
  */
-class ClientCredentialsGrantTypeTest extends OAuth2GrantTypeTest
+class ClientCredentialsGrantTypeTest extends OAuth2GrantTypeTestCase
 {
 
     /** @var  AccessTokenIssuer  */

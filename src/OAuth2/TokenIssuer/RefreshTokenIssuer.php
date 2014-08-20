@@ -30,10 +30,17 @@ class RefreshTokenIssuer
      */
     public function issueToken(IAccessToken $accessToken)
     {
+        $scopes = $accessToken->getScopes();
+
+        // in case of doctrine collections, etc
+        if ($scopes instanceof \Traversable) {
+            $scopes = iterator_to_array($scopes);
+        }
+
         return $this->refreshTokenStorage->generate(
             $accessToken->getUser(),
             $accessToken->getClient(),
-            $accessToken->getScopes()
+            $scopes
         );
     }
 

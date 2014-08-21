@@ -180,7 +180,7 @@ class AuthorizationCodeSpec extends ObjectBehavior
         $client->isAllowedToUse($this)->willReturn(true)->shouldBeCalled();
         $client->getRedirectUri()->willReturn('http://google.sk')->shouldBeCalled();
         $request->query('scope')->willReturn(null)->shouldBeCalled();
-        $client->getScopes()->willReturn([])->shouldBeCalled();
+        $user->getScopes()->willReturn([])->shouldBeCalled();
         $scopeResolver->getDefaultScopes()->willReturn([])->shouldBeCalled();
 
         $this
@@ -206,7 +206,7 @@ class AuthorizationCodeSpec extends ObjectBehavior
         $client->getRedirectUri()->willReturn('http://google.sk')->shouldBeCalled();
         $request->query('state')->willReturn('test')->shouldBeCalled();
         $request->query('scope')->willReturn(null)->shouldBeCalled();
-        $client->getScopes()->willReturn([$scope])->shouldBeCalled();
+        $user->getScopes()->willReturn([$scope])->shouldBeCalled();
         $scopeResolver->intersect(null, [$scope])->willReturn([$scope])->shouldBeCalled();
         $authorizationCodeStorage
             ->generate($user, $client, [$scope], 'http://google.sk', 'test')

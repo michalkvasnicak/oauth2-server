@@ -8,4 +8,12 @@ namespace OAuth2\Storage;
 interface IUser 
 {
 
+
+    /**
+     * Gets user assigned scopes
+     *
+     * @return IScope[]
+     */
+    public function getScopes();
+
 }

@@ -9,6 +9,7 @@ use OAuth2\Exception\UnauthorizedClientException;
 use OAuth2\Http\IRequest;
 use OAuth2\Resolver\IScopeResolver;
 use OAuth2\Storage\IClientStorage;
+use OAuth2\Storage\IUser;
 
 /**
  * @author Michal Kvasničák <michal.kvasnicak@mink.sk>
@@ -39,14 +40,16 @@ abstract class AAuthorizationGrantType implements IAuthorizationGrantType
      *
      * @param IRequest $request
      *
-     * @return array
+     * @param IUser $user
      *
      * @throws \OAuth2\Exception\InvalidClientException
      * @throws \OAuth2\Exception\InvalidRequestException
      * @throws \OAuth2\Exception\InvalidScopeException
      * @throws \OAuth2\Exception\UnauthorizedClientException
+     * @return array
+     *
      */
-    protected function parseAuthorizationRequest(IRequest $request)
+    protected function parseAuthorizationRequest(IRequest $request, IUser $user)
     {
         $clientId = $request->query('client_id');
 
@@ -88,7 +91,7 @@ abstract class AAuthorizationGrantType implements IAuthorizationGrantType
         }
 
         $requestedScopes = $request->query('scope');
-        $availableScopes = $client->getScopes();
+        $availableScopes = $user->getScopes();
 
         if (!$availableScopes) {
             $availableScopes = $this->scopeResolver->getDefaultScopes();

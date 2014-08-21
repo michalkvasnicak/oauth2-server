@@ -33,7 +33,7 @@ class ImplicitGrantTypeTest extends OAuth2GrantTypeTestCase
                 'public',
                 null,
                 [$implicitGrantType],
-                [new Scope('public'), new Scope('confidential')],
+                [],
                 null,
                 'http://google.com'
             )
@@ -54,7 +54,7 @@ class ImplicitGrantTypeTest extends OAuth2GrantTypeTestCase
         );
 
         // request authorization from user
-        $session = $this->getAuthorizator()->authorize($request, $user = new User());
+        $session = $this->getAuthorizator()->authorize($request, $user = new User('', '', [new Scope('edit'), new Scope('read')]));
 
         $this->assertInstanceOf('OAuth2\Security\ImplicitSession', $session);
         $this->assertInstanceOf('OAuth2\Security\IAuthorizationSession', $session);
@@ -63,7 +63,7 @@ class ImplicitGrantTypeTest extends OAuth2GrantTypeTestCase
         $this->assertInstanceOf('OAuth2\Storage\IClient', $session->getClient());
         $this->assertEquals('pom', $session->getState());
         $this->assertNotEmpty($session->getScopes());
-        $this->assertRegExp('~^http://google.com#access_token=(\w+)&expires_in=\d+&scope=public\+confidential&state=pom&token_type=Bearer$~', $session->getRedirectUri());
+        $this->assertRegExp('~^http://google.com#access_token=(\w+)&expires_in=\d+&scope=edit\+read&state=pom&token_type=Bearer$~', $session->getRedirectUri());
     }
 
 }

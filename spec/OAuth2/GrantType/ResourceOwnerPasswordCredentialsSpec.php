@@ -111,7 +111,7 @@ class ResourceOwnerPasswordCredentialsSpec extends ObjectBehavior
         $client->isAllowedToUse($this)->willReturn(true)->shouldBeCalled();
         $userAuthenticator->authenticate('root', 'p')->willReturn($user)->shouldBeCalled();
         $request->request('scope')->shouldBeCalled();
-        $client->getScopes()->willReturn([])->shouldBeCalled();
+        $user->getScopes()->willReturn([])->shouldBeCalled();
         $scopeResolver->getDefaultScopes()->willReturn([])->shouldBeCalled();
 
         $this
@@ -120,7 +120,7 @@ class ResourceOwnerPasswordCredentialsSpec extends ObjectBehavior
     }
 
 
-    function it_issues_an_access_token_using_client_scopes(
+    function it_issues_an_access_token_using_user_scopes(
         IRequest $request,
         IClientAuthenticator $clientAuthenticator,
         IUserAuthenticator $userAuthenticator,
@@ -137,7 +137,7 @@ class ResourceOwnerPasswordCredentialsSpec extends ObjectBehavior
         $client->isAllowedToUse($this)->willReturn(true)->shouldBeCalled();
         $userAuthenticator->authenticate('root', 'p')->willReturn($user)->shouldBeCalled();
         $request->request('scope')->willReturn(null)->shouldBeCalled();
-        $client->getScopes()->willReturn([$scope])->shouldBeCalled();
+        $user->getScopes()->willReturn([$scope])->shouldBeCalled();
         $scopeResolver->getDefaultScopes()->shouldNotBeCalled();
         $scopeResolver->intersect(null, [$scope])->willReturn([$scope])->shouldBeCalled();
         $accessTokenStorage->generate($user, $client, [$scope])->willReturn($accessToken)->shouldBeCalled();
@@ -163,7 +163,7 @@ class ResourceOwnerPasswordCredentialsSpec extends ObjectBehavior
         $client->isAllowedToUse($this)->willReturn(true)->shouldBeCalled();
         $userAuthenticator->authenticate('root', 'p')->willReturn($user)->shouldBeCalled();
         $request->request('scope')->willReturn(null)->shouldBeCalled();
-        $client->getScopes()->willReturn([])->shouldBeCalled();
+        $user->getScopes()->willReturn([])->shouldBeCalled();
         $scopeResolver->getDefaultScopes()->willReturn([$scope])->shouldBeCalled();
         $scopeResolver->intersect(null, [$scope])->willReturn([$scope])->shouldBeCalled();
         $accessTokenStorage->generate($user, $client, [$scope])->willReturn($accessToken)->shouldBeCalled();

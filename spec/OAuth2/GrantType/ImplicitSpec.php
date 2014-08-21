@@ -170,7 +170,7 @@ class ImplicitSpec extends ObjectBehavior
         $request->query('redirect_uri')->willReturn(null)->shouldBeCalled();
         $client->getRedirectUri()->willReturn('http://google.sk')->shouldBeCalled();
         $request->query('scope')->willReturn(null)->shouldBeCalled();
-        $client->getScopes()->willReturn([])->shouldBeCalled();
+        $user->getScopes()->willReturn([])->shouldBeCalled();
         $scopeResolver->getDefaultScopes()->willReturn([])->shouldBeCalled();
 
         $this
@@ -195,7 +195,7 @@ class ImplicitSpec extends ObjectBehavior
         $request->query('redirect_uri')->willReturn('http://google.com')->shouldBeCalled();
         $client->getRedirectUri()->willReturn('http://google.com')->shouldBeCalled();
         $request->query('scope')->willReturn('scope1')->shouldBeCalled();
-        $client->getScopes()->willReturn([])->shouldBeCalled();
+        $user->getScopes()->willReturn([])->shouldBeCalled();
         $scopeResolver->getDefaultScopes()->willReturn([$scope])->shouldBeCalled();
         $scopeResolver->intersect('scope1', [$scope])->willReturn([$scope])->shouldBeCalled();
         $request->query('state')->willReturn(null)->shouldBeCalled();

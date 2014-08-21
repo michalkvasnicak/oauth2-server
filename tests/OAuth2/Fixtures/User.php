@@ -20,11 +20,15 @@ class User implements IUser
      */
     private $password;
 
+    /** @var array  */
+    private $scopes = [];
 
-    public function __construct($username = null, $password = null)
+
+    public function __construct($username = null, $password = null, array $scopes = [])
     {
         $this->username = $username;
         $this->password = $password;
+        $this->scopes = $scopes;
     }
 
 
@@ -37,6 +41,12 @@ class User implements IUser
     public function getPassword()
     {
         return $this->password;
+    }
+
+
+    public function getScopes()
+    {
+        return $this->scopes;
     }
 
 }

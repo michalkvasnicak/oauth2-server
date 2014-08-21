@@ -3,6 +3,7 @@
 namespace tests\OAuth2;
 
 use OAuth2\GrantType\ResourceOwnerPasswordCredentials;
+use OAuth2\Storage\IScope;
 use tests\OAuth2\Fixtures\Client;
 use tests\OAuth2\Fixtures\Request;
 use tests\OAuth2\Fixtures\Scope;
@@ -19,8 +20,8 @@ class ResourceOwnerPasswordCredentialsGrantTypeTest extends OAuth2GrantTypeTestC
     {
         parent::setUp();
 
-        $admin = new User('admin', 'root');
-        $user = new User('user', 'user');
+        $admin = new User('admin', 'root', [new Scope('read'), new Scope('write')]);
+        $user = new User('user', 'user', [new Scope('read')]);
 
         $this->getUserAuthenticator()->addUser($admin);
         $this->getUserAuthenticator()->addUser($user);
@@ -33,10 +34,18 @@ class ResourceOwnerPasswordCredentialsGrantTypeTest extends OAuth2GrantTypeTestC
         );
 
         $this->getClientStorage()->add(
-            new Client('public', null, [$resourceOwnerPasswordCredentialsGrantType], [new Scope('public')])
+            new Client('public', null, [$resourceOwnerPasswordCredentialsGrantType], [new Scope('read')])
         );
         $this->getClientStorage()->add(
-            new Client('confidential', 'secret', [$resourceOwnerPasswordCredentialsGrantType], [new Scope('confidential')])
+            new Client(
+                'confidential',
+                'secret',
+                [$resourceOwnerPasswordCredentialsGrantType],
+                [
+                    new Scope('read'),
+                    new Scope('write')
+                ]
+            )
         );
 
         $this->getGrantTypeResolver()->accept($resourceOwnerPasswordCredentialsGrantType);
@@ -55,7 +64,7 @@ class ResourceOwnerPasswordCredentialsGrantTypeTest extends OAuth2GrantTypeTestC
                     'grant_type' => 'password',
                     'username' => 'admin',
                     'password' => 'root',
-                    'scope' => 'public'
+                    'scope' => 'read'
                 ]
             ],
             [
@@ -103,10 +112,52 @@ class ResourceOwnerPasswordCredentialsGrantTypeTest extends OAuth2GrantTypeTestC
             $this->assertGreaterThan(time(), $token->getExpiresAt());
             $this->assertNotEmpty($token->getScopes());
             $this->assertEquals(
-                isset($client['headers']['PHP_AUTH_USER']) ? $client['headers']['PHP_AUTH_USER'] : $client['request']['client_id'],
+                isset($client['headers']['PHP_AUTH_USER'])
+                    ? $client['headers']['PHP_AUTH_USER']
+                    : $client['request']['client_id'],
                 $token->getClient()->getId()
             );
         }
+
+        // test scopes
+        // first public client can work only with read scopes
+        // so admin user has to return read scope only
+        $request = new Request(
+            'POST',
+            [],
+            [
+                'client_id' => 'public',
+                'grant_type' => 'password',
+                'username' => 'admin',
+                'password' => 'root',
+                'scope' => 'read'
+            ]
+        );
+
+        $token = $this->getAccessTokenIssuer()->issueToken($request);
+
+        $this->assertCount(1, $token->getScopes());
+        $this->assertEquals('read', $token->getScopes()[0]->getId());
+
+        $request = new Request(
+            'POST',
+            [],
+            [
+                'client_id' => 'confidential',
+                'client_secret' => 'secret',
+                'grant_type' => 'password',
+                'username' => 'admin',
+                'password' => 'root'
+            ]
+        );
+
+        $token = $this->getAccessTokenIssuer()->issueToken($request);
+
+        $this->assertCount(2, $token->getScopes());
+        $this->assertEquals(
+            ['read', 'write'],
+            array_map(function(IScope $scope) { return $scope->getId(); }, $token->getScopes())
+        );
     }
 
 

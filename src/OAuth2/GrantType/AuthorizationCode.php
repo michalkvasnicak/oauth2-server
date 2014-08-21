@@ -66,7 +66,7 @@ class AuthorizationCode extends AAuthorizationGrantType
      */
     public function authorize(IRequest $request, IUser $user)
     {
-        $requirements = parent::parseAuthorizationRequest($request);
+        $requirements = parent::parseAuthorizationRequest($request, $user);
 
         // redirect uri is without authorization code!
         $authorizationCode = $this->authorizationCodeStorage->generate(

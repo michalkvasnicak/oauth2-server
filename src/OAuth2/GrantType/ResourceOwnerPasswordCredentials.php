@@ -99,7 +99,7 @@ class ResourceOwnerPasswordCredentials implements IGrantType
         }
 
         $requestedScopes = $request->request('scope');
-        $availableScopes = $client->getScopes();
+        $availableScopes = $user->getScopes();
 
         if (empty($availableScopes)) {
             $availableScopes = $this->scopeResolver->getDefaultScopes();
@@ -109,6 +109,7 @@ class ResourceOwnerPasswordCredentials implements IGrantType
             throw new InvalidScopeException('Scope parameter has to be specified.');
         }
 
+        // intersection of requested and user scopes
         $scopes = $this->scopeResolver->intersect($requestedScopes, $availableScopes);
 
         return $this->accessTokenStorage->generate(

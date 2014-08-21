@@ -32,7 +32,7 @@ class AuthorizationCodeGrantTypeTest extends OAuth2GrantTypeTestCase
                 'public',
                 null,
                 [$authorizationCodeGrantType],
-                [new Scope('public')],
+                [],
                 null,
                 'http://google.com'
             )
@@ -42,7 +42,7 @@ class AuthorizationCodeGrantTypeTest extends OAuth2GrantTypeTestCase
                 'confidential',
                 'secret',
                 [$authorizationCodeGrantType],
-                [new Scope('confidential')],
+                [],
                 null,
                 'http://google.com'
             )
@@ -63,7 +63,7 @@ class AuthorizationCodeGrantTypeTest extends OAuth2GrantTypeTestCase
         );
 
         // request authorization from user
-        $session = $this->getAuthorizator()->authorize($request, $user = new User());
+        $session = $this->getAuthorizator()->authorize($request, $user = new User('', '', [new Scope('edit')]));
 
         $this->assertInstanceOf(
             'OAuth2\Security\AuthorizationCodeSession',

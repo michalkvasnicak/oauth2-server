@@ -55,7 +55,7 @@ class Implicit extends AAuthorizationGrantType
      */
     public function authorize(IRequest $request, IUser $user)
     {
-        $requirements = parent::parseAuthorizationRequest($request);
+        $requirements = parent::parseAuthorizationRequest($request, $user);
 
         $accessToken = $this->accessTokenStorage->generate(
             $user,

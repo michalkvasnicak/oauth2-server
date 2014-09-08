@@ -5,6 +5,7 @@ namespace OAuth2\GrantType;
 use OAuth2\Exception\InvalidGrantException;
 use OAuth2\Exception\InvalidRequestException;
 use OAuth2\Exception\InvalidScopeException;
+use OAuth2\Exception\InvalidUserCredentialsException;
 use OAuth2\Exception\UnauthorizedClientException;
 use OAuth2\Resolver\IScopeResolver;
 use OAuth2\Security\IClientAuthenticator;
@@ -95,7 +96,7 @@ class ResourceOwnerPasswordCredentials implements IGrantType
         $user = $this->userAuthenticator->authenticate($username, $password);
 
         if (!$user) {
-            throw new InvalidGrantException('Invalid user credentials.');
+            throw new InvalidUserCredentialsException('Invalid user credentials.');
         }
 
         $requestedScopes = $request->request('scope');

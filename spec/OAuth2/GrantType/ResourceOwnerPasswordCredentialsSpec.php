@@ -2,9 +2,9 @@
 
 namespace spec\OAuth2\GrantType;
 
-use OAuth2\Exception\InvalidGrantException;
 use OAuth2\Exception\InvalidRequestException;
 use OAuth2\Exception\InvalidScopeException;
+use OAuth2\Exception\InvalidUserCredentialsException;
 use OAuth2\Exception\UnauthorizedClientException;
 use OAuth2\Http\IRequest;
 use OAuth2\Resolver\IScopeResolver;
@@ -92,7 +92,7 @@ class ResourceOwnerPasswordCredentialsSpec extends ObjectBehavior
         $userAuthenticator->authenticate('root', 'p')->willReturn(null)->shouldBeCalled();
 
         $this
-            ->shouldThrow(new InvalidGrantException('Invalid user credentials.'))
+            ->shouldThrow(new InvalidUserCredentialsException('Invalid user credentials.'))
             ->during('grant', [$request]);
     }
 

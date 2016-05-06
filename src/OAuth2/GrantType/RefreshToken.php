@@ -96,6 +96,12 @@ class RefreshToken implements IGrantType
             throw new UnauthorizedClientException('Client can not use this grant type.');
         }
 
+        $expiresAt = $refreshToken->getExpiresAt();
+
+        if ($expiresAt instanceof \DateTime) {
+            $expiresAt = $expiresAt->getTimestamp();
+        }
+
         // is refresh token expired?
         if ($refreshToken->getExpiresAt() < time()) {
             throw new InvalidGrantException('Refresh token has expired.');

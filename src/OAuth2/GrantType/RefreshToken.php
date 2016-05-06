@@ -103,7 +103,7 @@ class RefreshToken implements IGrantType
         }
 
         // is refresh token expired?
-        if ($refreshToken->getExpiresAt() < time()) {
+        if ($expiresAt < time()) {
             throw new InvalidGrantException('Refresh token has expired.');
         }
 
